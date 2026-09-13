@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Nandini! 💖✨</title>
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Great+Vibes&family=Nunito:wght@400;700&display=swap" rel="stylesheet" />
+  
+  <style>
+    :root {
+      --primary-color: #9d8ec7;
+      --secondary-color: #72b4b4;
+      --accent-pink: #ffb7c5;
+      --bg-color: #fcf8ff;
+      --card-bg: #ffffff;
+      --text-color: #4a4a4a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      overflow-x: hidden;
+      text-align: center;
+      position: relative;
+    }
+
+    /* Floating Background Emojis */
+    .floating-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bg-emoji {
+      position: absolute;
+      font-size: 1.5rem;
+      animation: float 6s ease-in-out infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(10deg); }
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      z-index: 1;
+      padding: 60px 20px 40px;
+      background: linear-gradient(135deg, #e6e6fa 0%, #e0f2f1 100%);
+      border-bottom-left-radius: 40px;
+      border-bottom-right-radius: 40px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+
+    h1.title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 4rem;
+      color: #6a4c93;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+
+    p.subtitle {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.3rem;
+      color: #555;
+    }
+
+    /* Floating Badges/Stickers */
+    .sticker {
+      display: inline-block;
+      background: var(--accent-pink);
+      color: #fff;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      margin: 10px 5px;
+      transform: rotate(-3deg);
+      transition: transform 0.3s;
+    }
+    .sticker:hover {
+      transform: rotate(3deg) scale(1.05);
+    }
+    .sticker.teal { background: var(--secondary-color); transform: rotate(2deg); }
+    .sticker.purple { background: var(--primary-color); transform: rotate(-2deg); }
+
+    /* Main Container */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Photo Gallery Section */
+    .gallery-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 30px;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+
+    .photo-card {
+      background: #fff;
+      padding: 15px 15px 25px 15px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      max-width: 320px;
+      transform: rotate(-1deg);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .photo-card:nth-child(even) {
+      transform: rotate(2deg);
+    }
+
+    .photo-card:hover {
+      transform: scale(1.03) rotate(0deg);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .photo-card p {
+      font-family: 'Fredoka', sans-serif;
+      color: #555;
+      font-size: 1.1rem;
+    }
+
+    /* Interactive Birthday Cake */
+    .cake-section {
+      background: #fff;
+      border-radius: 30px;
+      padding: 40px 20px;
+      margin-bottom: 50px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
+
+    .cake {
+      width: 150px;
+      height: 100px;
+      background: #f48fb1;
+      margin: 60px auto 20px;
+      border-radius: 10px 10px 0 0;
+      position: relative;
+      box-shadow: inset 0 -10px 0 #ec407a;
+    }
+
+    .cake::before {
+      content: '';
+      position: absolute;
+      top: -30px;
+      left: 15px;
+      width: 120px;
+      height: 30px;
+      background: #ce93d8;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .candle {
+      width: 12px;
+      height: 40px;
+      background: #fff176;
+      position: absolute;
+      top: -65px;
+      left: 69px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .flame {
+      width: 14px;
+      height: 20px;
+      background: #ff9800;
+      border-radius: 50% 50% 20% 20%;
+      position: absolute;
+      top: -18px;
+      left: -1px;
+      box-shadow: 0 0 10px #ffeb3b;
+      animation: flicker 0.6s infinite alternate;
+    }
+
+    .flame.off {
+      display: none;
+    }
+
+    @keyframes flicker {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.15); }
+    }
+
+    /* Dynamic Love Note Generator */
+    .interactive-card {
+      background: linear-gradient(135deg, #fff0f5 0%, #e6e6fa 100%);
+      padding: 30px;
+      border-radius: 25px;
+      margin-bottom: 50px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    }
+
+    .reason-box {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #6a4c93;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    /* Buttons */
+    .btn {
+      background: linear-gradient(45deg, #9d8ec7, #72b4b4);
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(114, 180, 180, 0.4);
+      transition: all 0.3s ease;
+      margin: 5px;
+    }
+
+    .btn:hover {
+      transform: translateY(-3deg) scale(1.03);
+      box-shadow: 0 8px 20px rgba(114, 180, 180, 0.6);
+    }
+
+    /* Modal / Love Envelope */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 10;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 40px 30px;
+      border-radius: 20px;
+      max-width: 500px;
+      width: 90%;
+      position: relative;
+      animation: popIn 0.3s ease;
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.7); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #888;
+    }
+
+    footer {
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Floating Emojis -->
+  <div class="floating-bg" id="floatingBg"></div>
+
+  <!-- Hero Header -->
+  <div class="hero">
+    <div class="sticker purple">👑 Birthday Queen</div>
+    <div class="sticker teal">✨ Beautiful Nandini</div>
+    <div class="sticker">🌸 Saree & Sunshine 💖</div>
+    
+    <h1 class="title">Happy Birthday, Nandini! 🎉</h1>
+    <p class="subtitle">Wishing the most wonderful, pretty, and amazing girl the happiest day ever! 💌</p>
+  </div>
+
+  <div class="container">
+
+    <!-- Photo Gallery -->
+    <h2 class="gallery-title">Memories & Smiles 📸✨</h2>
+    <div class="gallery">
+      <div class="photo-card" onclick="triggerConfetti()">
+        <img src="photo1.jpg" alt="Nandini in Saree" />
+        <p>Elegance redefined 🥻✨</p>
+      </div>
+      <div class="photo-card" onclick="triggerConfetti()">
+        <img src="photo2.jpg" alt="Nandini Mirror Selfie" />
+        <p>Cutest mirror selfie 🤳💙</p>
+      </div>
+    </div>
+
+    <!-- Virtual Birthday Cake -->
+    <div class="cake-section">
+      <h2>Make a Wish & Blow the Candle! 🎂✨</h2>
+      <p style="color: #777; margin-top: 5px;">(Click on the candle flame to blow it out)</p>
+      <div class="cake">
+        <div class="candle" onclick="blowCandle()">
+          <div class="flame" id="flame"></div>
+        </div>
+      </div>
+      <p id="wishText" style="font-weight: bold; color: var(--primary-color); min-height: 24px;"></p>
+    </div>
+
+    <!-- Interactive Reason Generator -->
+    <div class="interactive-card">
+      <h2>Reasons Why You Are Special 💖</h2>
+      <div class="reason-box" id="reasonBox">Click the button below to see! 👇</div>
+      <button class="btn" onclick="nextReason()">Show Me Another Reason! ✨</button>
+    </div>
+
+    <!-- Special Message Button -->
+    <div style="margin-bottom: 40px;">
+      <button class="btn" style="background: linear-gradient(45deg, #ff9a9e, #fecfef);" onclick="openModal()">
+        Open Secret Birthday Note 💌
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Secret Note Modal -->
+  <div class="modal" id="noteModal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <h2 style="font-family: 'Great Vibes', cursive; font-size: 3rem; color: var(--primary-color);">Dear Nandini, 💌</h2>
+      <p style="margin-top: 15px; line-height: 1.6; color: #555;">
+        On your special day, I just want to remind you how bright you light up every room you walk into! 🌟 Whether you're slaying in a saree or striking cute poses, you are effortless, kind, and wonderful. <br/><br/>
+        May this year bring you all the happiness, success, laughter, and sweetness in the world. Keep shining bright! 🥳🎈
+      </p>
+      <button class="btn" style="margin-top: 20px;" onclick="closeModal(); triggerConfetti();">Celebrate! 🎊</button>
+    </div>
+  </div>
+
+  <footer>
+    Made with ❤️ for Nandini's Birthday ✨
+  </footer>
+
+  <script>
+    // Trigger initial confetti
+    window.onload = () => {
+      triggerConfetti();
+      createFloatingEmojis();
+    };
+
+    function triggerConfetti() {
+      confetti({
+        particleCount: 80,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+    }
+
+    // Floating Background Emojis
+    const emojis = ['💖', '✨', '🌸', '👑', '🦋', '🎈', '🎉', '💜'];
+    function createFloatingEmojis() {
+      const container = id('floatingBg');
+      for (let i = 0; i < 20; i++) {
+        const el = document.createElement('div');
+        el.className = 'bg-emoji';
+        el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+        el.style.left = Math.random() * 100 + 'vw';
+        el.style.top = Math.random() * 100 + 'vh';
+        el.style.animationDuration = (4 + Math.random() * 4) + 's';
+        el.style.animationDelay = Math.random() * 2 + 's';
+        container.appendChild(el);
+      }
+    }
+
+    // Candle blow out
+    let candleBlown = false;
+    function blowCandle() {
+      const flame = id('flame');
+      const wishText = id('wishText');
+      if (!candleBlown) {
+        flame.classList.add('off');
+        wishText.innerText = "🎉 Yay! May all your birthday wishes come true! 🌟";
+        triggerConfetti();
+        candleBlown = true;
+      }
+    }
+
+    // Reasons Generator
+    const reasons = [
+      "Your smile can easily brighten up anyone's day! 😊",
+      "You look absolutely stunning in traditional outfits! 🥻✨",
+      "Your mirror selfie pose game is unbeatable 🤳💖",
+      "You have a genuine, beautiful heart 🌸",
+      "Everything is just more fun when you're around 🎉",
+      "You deserve all the happiness, cake, and love in the world today! 🎂💖"
+    ];
+    let reasonIdx = 0;
+
+    function nextReason() {
+      const box = id('reasonBox');
+      box.innerText = reasons[reasonIdx];
+      reasonIdx = (reasonIdx + 1) % reasons.length;
+      triggerConfetti();
+    }
+
+    // Modal controls
+    function openModal() {
+      id('noteModal').style.display = 'flex';
+      triggerConfetti();
+    }
+
+    function closeModal() {
+      id('noteModal').style.display = 'none';
+    }
+
+    function id(name) {
+      return document.getElementById(name);
+    }
+  </script>
+</body>
+</html>
